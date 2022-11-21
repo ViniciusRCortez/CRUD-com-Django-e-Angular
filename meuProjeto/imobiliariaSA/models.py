@@ -43,6 +43,22 @@ class Imovel(models.Model):
         db_table = "tab_imovel"
         verbose_name_plural = u"Imoveis"
 
+
+class FotoImovel(models.Model):
+    id = models.AutoField(primary_key=True)
+    imovel = models.ForeignKey(Imovel, on_delete=models.CASCADE)
+    foto = models.ImageField(upload_to="media/fotos/%Y/%m/%d", verbose_name="Foto", help_text="Escolha uma foto", blank=True, null=True)
+    descricao = models.TextField(help_text="Descrição", verbose_name="Descrição")
+
+    def __str__(self):
+        return f"{self.imovel.nome} - {self.descricao}"
+
+    class Meta:
+        managed = True
+        db_table = "tab_fotoImovel"
+        verbose_name_plural = u"Fotos dos imoveis"
+
+
 class Pessoa(models.Model):
 
     SEXO_OPCOES = (
