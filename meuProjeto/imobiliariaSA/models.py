@@ -38,6 +38,9 @@ class Imovel(models.Model):
     def __str__(self):
         return self.nome
 
+    def fotos(self):
+        return FotoImovel.objects.filter(imovel_id=self.id)
+
     class Meta:
         managed = True
         db_table = "tab_imovel"

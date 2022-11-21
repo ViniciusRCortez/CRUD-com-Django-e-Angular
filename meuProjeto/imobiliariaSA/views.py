@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets, permissions
-from imobiliariaSA.serializers import UserSerializer, GroupSerializer
+from imobiliariaSA.serializers import *
+from imobiliariaSA.models import Imovel, FotoImovel
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -19,5 +20,16 @@ class GroupViewSet(viewsets.ModelViewSet):
 
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+
+
+class ImovelViewSet(viewsets.ModelViewSet):
+    """
+        API endpoint that allows imoveis to be viewed or edited
+    """
+
+    queryset = Imovel.objects.all()
+    serializer_class = ImovelSerializer
     permission_classes = [permissions.IsAuthenticated]
 

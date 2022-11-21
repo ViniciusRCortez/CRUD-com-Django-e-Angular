@@ -17,15 +17,20 @@ from django.contrib import admin
 from django.urls import path, include, re_path
 from rest_framework import routers, serializers, viewsets
 from imobiliariaSA import views
+from django.conf.urls.static import static
+from django.conf import settings
+from django.views.static import serve
 
 
 
 router = routers.DefaultRouter()
 router.register(r"users", views.UserViewSet)
 router.register(r"groups", views.GroupViewSet)
+router.register(r"imoveis", views.ImovelViewSet)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
     re_path(r"^", include(router.urls)),
-]
+    #re_path(r"^(?P<path>.*)$", serve, {'document_root': settings.MEDIA_ROOT}),
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
