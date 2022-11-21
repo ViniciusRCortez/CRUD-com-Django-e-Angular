@@ -27,10 +27,12 @@ router = routers.DefaultRouter()
 router.register(r"users", views.UserViewSet)
 router.register(r"groups", views.GroupViewSet)
 router.register(r"imoveis", views.ImovelViewSet)
+router.register(r"tiposImoveis", views.TipoImovelViewSet)
+router.register(r"categorias", views.CategoriaViewSet)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
     re_path(r"^", include(router.urls)),
-    #re_path(r"^(?P<path>.*)$", serve, {'document_root': settings.MEDIA_ROOT}),
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    re_path("login/", views.login),
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
+    "rest_framework.authtoken",
     "imobiliariaSA",
     "nested_inline",
 ]
@@ -123,3 +124,17 @@ MEDIA_ROOT = os.path.join(BASE_DIR, '')#Esse argumento é vazio pois para difere
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+REST_FRAMEWORK = {
+
+    "DEFAULT_AUTHENTICATION_CLASSES" :( 
+        "rest_framework.authentication.TokenAuthentication",
+        "rest_framework.authentication.SessionAuthentication",
+        "rest_framework.authentication.BasicAuthentication",
+    ),
+    
+    "DEFAULT_PERMISSION_CLASSES" : (
+        "rest_framework.permissions.IsAuthenticated",
+    ),
+    "PAGE_SIZE" : 10,
+}
